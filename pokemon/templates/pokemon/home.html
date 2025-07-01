@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex Inicio</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; background: #f6f8fc; }
+        .container { max-width: 500px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #d0d7de; padding: 2em; }
+        h1 { text-align: center; color: #ef5350; }
+        .search-box { display: flex; justify-content: center; margin-bottom: 1em; }
+        input[type=text] { width: 70%; padding: 0.7em; border: 1px solid #bdbdbd; border-radius: 6px 0 0 6px; outline: none; font-size: 1em; }
+        button { padding: 0.7em 1.5em; border: none; background: #ef5350; color: #fff; border-radius: 0 6px 6px 0; font-size: 1em; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #d32f2f; }
+        .examples { text-align: center; color: #757575; font-size: 0.95em; }
+        .footer { text-align: center; margin-top: 2em; color: #bdbdbd; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pokédex</h1>
+        <form class="search-box" action="/pokemon/" method="get" onsubmit="event.preventDefault(); window.location='/pokemon/' + document.getElementById('pokeinput').value.toLowerCase().trim() + '/';">
+            <input id="pokeinput" type="text" name="name_or_id" placeholder="Nombre o ID de Pokémon" required autofocus autocomplete="off">
+            <button type="submit">Buscar</button>
+        </form>
+        <div class="examples">
+            Ejemplo: pikachu, bulbasaur, 1, 25...
+        </div>
+    </div>
+    <div class="footer">
+        Powered by <a href="https://pokeapi.co/" target="_blank">PokeAPI</a> &middot; Desarrollado con Django
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon Detail</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; background: #f6f8fc; }
+        .pokemon-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 2em; max-width: 400px; margin: 0 auto; box-shadow: 0 2px 8px #d0d7de; }
+        .pokemon-img { width: 120px; display: block; margin: 0 auto 1em auto; }
+        h2 { text-align: center; color: #ef5350; text-transform: capitalize; }
+        .info { margin: 1em 0; }
+        .label { color: #757575; font-weight: bold; }
+        .types { margin-top: 0.5em; }
+        .type-badge { display: inline-block; background: #ef5350; color: #fff; border-radius: 8px; padding: 0.2em 0.7em; margin-right: 0.3em; font-size: 0.95em; }
+        .back-link { display: block; text-align: center; margin-top: 2em; color: #1976d2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Pokémon Detail</h1>
+    {% if pokemon %}
+        <div class="pokemon-card">
+            <h2>{{ pokemon.name }}</h2>
+            <img class="pokemon-img" src="{{ pokemon.sprites.front_default }}" alt="{{ pokemon.name }}">
+            <div class="info"><span class="label">ID:</span> {{ pokemon.id }}</div>
+            <div class="info"><span class="label">Altura:</span> {{ pokemon.height }}</div>
+            <div class="info"><span class="label">Peso:</span> {{ pokemon.weight }}</div>
+            <div class="types">
+                <span class="label">Tipos:</span>
+                {% for t in pokemon.types %}
+                    <span class="type-badge">{{ t.type.name }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="pokemon-card">
+            <h2>No encontrado</h2>
+            <p>No se encontró información para "{{ name_or_id }}".</p>
+        </div>
+    {% endif %}
+    <a class="back-link" href="/">&larr; Volver a inicio</a>
+</body>
+</html>
