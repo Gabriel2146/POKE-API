@@ -13,8 +13,8 @@
         li { margin: 0.7em 0; }
         a { color: #1976d2; text-decoration: none; font-size: 1.1em; }
         a:hover { text-decoration: underline; }
-        .pagination { display: flex; justify-content: center; gap: 1em; margin-top: 2em; }
-        .pagination a, .pagination span { padding: 0.5em 1em; border-radius: 6px; background: #efefef; color: #333; text-decoration: none; }
+        .pagination { display: flex; justify-content: center; gap: 1em; margin-top: 2em; flex-wrap: wrap; }
+        .pagination a, .pagination span { padding: 0.5em 1em; border-radius: 6px; background: #efefef; color: #333; text-decoration: none; margin-bottom: 0.5em; }
         .pagination a.active, .pagination span.active { background: #ef5350; color: #fff; }
         .pagination a:hover { background: #d32f2f; color: #fff; }
         .spinner { display: none; justify-content: center; align-items: center; margin: 2em 0; }
@@ -24,7 +24,9 @@
         @keyframes lds-dual-ring { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @media (max-width: 600px) {
             .container { padding: 1em; }
-            h1 { font-size: 1.3em; }
+            h1 { font-size: 1.1em; }
+            ul { padding-left: 0; }
+            .pagination { flex-direction: column; gap: 0.5em; }
         }
     </style>
     <script>
