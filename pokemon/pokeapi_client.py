@@ -7,12 +7,22 @@ class PokemonAPIClientStrategy(ABC):
     def get_pokemon(self, name_or_id):
         pass
 
+    @abstractmethod
+    def get_pokemon_list(self, offset=0, limit=20):
+        pass
+
 class DefaultPokemonAPIClient(PokemonAPIClientStrategy):
     """Implementación por defecto para obtener datos de la PokeAPI."""
     BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
     def get_pokemon(self, name_or_id):
-        response = requests.get(f'{self.BASE_URL}{name_or_id}')
+        response = requests.get(f'{self.BASE_URL}{name_or_id}', timeout=5)
+        if response.status_code == 200:
+            return response.json()
+        return None
+
+    def get_pokemon_list(self, offset=0, limit=20):
+        response = requests.get(f'{self.BASE_URL}?offset={offset}&limit={limit}', timeout=5)
         if response.status_code == 200:
             return response.json()
         return None

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pokémon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; background: #f6f8fc; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #d0d7de; padding: 2em; }
+        h1 { text-align: center; color: #ef5350; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 0.7em 0; }
+        a { color: #1976d2; text-decoration: none; font-size: 1.1em; }
+        a:hover { text-decoration: underline; }
+        .pagination { display: flex; justify-content: center; gap: 1em; margin-top: 2em; }
+        .pagination a, .pagination span { padding: 0.5em 1em; border-radius: 6px; background: #efefef; color: #333; text-decoration: none; }
+        .pagination a.active, .pagination span.active { background: #ef5350; color: #fff; }
+        .pagination a:hover { background: #d32f2f; color: #fff; }
+        @media (max-width: 600px) {
+            .container { padding: 1em; }
+            h1 { font-size: 1.3em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Pokémon</h1>
+        <ul>
+            {% for poke in pokemons %}
+                <li><a href="/pokemon/{{ poke.name }}/">{{ poke.name|title }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            {% if prev_page %}
+                <a href="?page={{ prev_page }}">&larr; Anterior</a>
+            {% endif %}
+            <span class="active">Página {{ page }}</span>
+            {% if next_page %}
+                <a href="?page={{ next_page }}">Siguiente &rarr;</a>
+            {% endif %}
+        </div>
+        <div style="text-align:center; margin-top:2em;">
+            <a href="/">&larr; Volver al inicio</a>
+        </div>
+    </div>
+</body>
+</html>
