@@ -9,6 +9,10 @@
         .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #d0d7de; padding: 2em; }
         h1 { text-align: center; color: #ef5350; }
         .error { background: #ffebee; color: #c62828; border: 1px solid #c62828; border-radius: 6px; padding: 1em; margin-bottom: 1em; text-align: center; }
+        .filters { display: flex; flex-wrap: wrap; gap: 1em; justify-content: center; margin-bottom: 1em; }
+        .filters select, .filters input[type=text] { padding: 0.5em; border-radius: 6px; border: 1px solid #bdbdbd; font-size: 1em; }
+        .filters button { padding: 0.5em 1em; border-radius: 6px; border: none; background: #ef5350; color: #fff; font-size: 1em; cursor: pointer; }
+        .filters button:hover { background: #d32f2f; }
         ul { list-style: none; padding: 0; }
         li { margin: 0.7em 0; }
         a { color: #1976d2; text-decoration: none; font-size: 1.1em; }
@@ -27,6 +31,7 @@
             h1 { font-size: 1.1em; }
             ul { padding-left: 0; }
             .pagination { flex-direction: column; gap: 0.5em; }
+            .filters { flex-direction: column; gap: 0.5em; }
         }
     </style>
     <script>
@@ -42,6 +47,16 @@
 <body>
     <div class="container">
         <h1>Lista de Pokémon</h1>
+        <form class="filters" method="get" action="">
+            <select name="type">
+                <option value="">Todos los tipos</option>
+                {% for t in types %}
+                    <option value="{{ t.name }}" {% if selected_type == t.name %}selected{% endif %}>{{ t.name|title }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="search" placeholder="Buscar por nombre" value="{{ search }}">
+            <button type="submit">Filtrar</button>
+        </form>
         {% if error %}
             <div class="error">{{ error }}</div>
         {% endif %}
@@ -53,11 +68,11 @@
         </ul>
         <div class="pagination">
             {% if prev_page %}
-                <a href="?page={{ prev_page }}">&larr; Anterior</a>
+                <a href="?page={{ prev_page }}{% if selected_type %}&type={{ selected_type }}{% endif %}{% if search %}&search={{ search }}{% endif %}">&larr; Anterior</a>
             {% endif %}
             <span class="active">Página {{ page }}</span>
             {% if next_page %}
-                <a href="?page={{ next_page }}">Siguiente &rarr;</a>
+                <a href="?page={{ next_page }}{% if selected_type %}&type={{ selected_type }}{% endif %}{% if search %}&search={{ search }}{% endif %}">Siguiente &rarr;</a>
             {% endif %}
         </div>
         <div style="text-align:center; margin-top:2em;">
